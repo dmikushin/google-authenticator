@@ -1,0 +1,3 @@
+[submodule "ThirdParty/extract_otp_secret_keys"]
+	path = ThirdParty/extract_otp_secret_keys
+	url = https://github.com/scito/extract_otp_secret_keys.git
