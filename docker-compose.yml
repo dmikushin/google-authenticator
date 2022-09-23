@@ -5,7 +5,7 @@ services:
     image: google-authenticator
     restart: always
     volumes:
-      - ${PWD}/authenticator.data:/root/.authenticator/authenticator.data
+      - ${PWD}/authenticator/:/root/.authenticator/
       - ${PWD}/server:/usr/bin/server
     ports:
       - "127.0.0.1:48080:8080"
