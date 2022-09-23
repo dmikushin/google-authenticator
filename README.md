@@ -36,7 +36,5 @@ Once the token is added, it could be used normally:
 authenticator generate
 ```
 
-## TODO
-
-Web interface
+or via the web interface at http://localhost:48080
 

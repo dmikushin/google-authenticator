@@ -1,5 +1,41 @@
 #!/usr/bin/python3
+from authenticator.data import ClientData, ClientFile
+from authenticator.hotp import HOTP
+from authenticator.cli import CLI
 from bottle import route, request, run
+import os
+
+class Authenticator:
+
+    def __init__(self, passphrase):
+    
+        cli = CLI()
+        self.__data_dir = cli._locate_data_dir()
+        self.__data_file = os.path.join(self.__data_dir, 'authenticator.data')
+    
+        # Load the ClientData objects
+        self.__cf = ClientFile(passphrase)
+        self.cds = self.__cf.load(self.__data_file)
+
+    def generate_once(self):
+        """Generate a HOTP for each configuration in cds.
+        """
+        if 0 == len(self.cds):
+            # None found; just get out
+            return "<p>No HOTP/TOTP configurations found.</p>"
+
+        result = ""
+        for cd in self.cds:
+            if cd.counter_from_time():
+                hotp = HOTP()
+                code_string, remaining_seconds = hotp.generate_code_from_time(
+                    cd.shared_secret(),
+                    code_length=cd.password_length(),
+                    period=cd.period())
+                result += "<p>{0}: {1} (expires in {2} seconds)</p>".format(
+                        cd.client_id(), code_string, remaining_seconds)
+
+        return result
 
 def check_login(passphrase):
     return True
@@ -16,10 +52,12 @@ def login():
 @route('/login', method='POST')
 def do_login():
     passphrase = request.forms.get('passphrase')
-    if check_login(passphrase):
-        return "<p>Your login information was correct.</p>"
-    else:
-        return "<p>Login failed.</p>"
+    try:
+        authenticator = Authenticator(passphrase)
+    except:
+        return "<p>Invalid passphrase</p>"
+
+    return authenticator.generate_once()
 
 run(host='0.0.0.0', port=8080)
 
