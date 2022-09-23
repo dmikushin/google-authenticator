@@ -4,7 +4,7 @@ A Docker container with [authenticator CLI](https://pypi.org/project/authenticat
 
 ## Is it secure or not?
 
-In principle, the main purpose of 2FA is to have the second factor of authentication on a *different* device. It does not imply the cell phone is necessarily need to be this device. You can put 2FA on another thrusted computer, preferably phisically located at a different city or country. Such strategy could actually make your 2FA more secure than the phone, which could be broken or stolen.
+In principle, the main purpose of 2FA is to have the second factor of authentication on a *different* device. It does not imply this device must necessarily be a cell phone. You can put 2FA on another thrusted computer, preferably phisically located in a different city or country. Such strategy could actually make your 2FA more secure than the phone, which could be broken or stolen.
 
 ## No warranty
 
