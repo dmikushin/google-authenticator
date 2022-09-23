@@ -12,7 +12,31 @@ The security risks are your own. Be wise and do your own research.
 
 ## Usage
 
+Start the container:
+
 ```
 docker build -t google-authenticator .
 docker-compose up -d
 ```
+
+Inside the container:
+
+```
+authenticator add Google:youremail@gmail.com
+```
+
+You will need to hand in two things:
+
+1. A passphrase, which will be used to encrypt the token in the container
+2. A shared key, which connects your token and the authorization authority (e.g. Google) into a thrust ring. The shared key could be extracted from the authenticator app, using [a nice tool](https://github.com/scito/extract_otp_secret_keys).
+
+Once the token is added, it could be used normally:
+
+```
+authenticator generate
+```
+
+## TODO
+
+Web interface
+
