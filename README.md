@@ -1,6 +1,6 @@
 # Google Authenticator container
 
-A Docker container with [authenticator CLI](https://pypi.org/project/authenticator/) to stop being dependent on a cell phone.
+A Docker container with [Google Authenticator](https://pypi.org/project/authenticator/) to stop being dependent on a cell phone. Import your existing tokens with CLI and access the codes with CLI or a minimalistic web interface.
 
 ## Is it secure or not?
 
