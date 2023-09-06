@@ -12,11 +12,18 @@ The security risks are your own. Be wise and do your own research.
 
 ## Usage
 
+Clone together with submodules:
+
+```
+git clone --recurse-submodules git@github.com:dmikushin/google-authenticator.git
+```
+
 Start the container:
 
 ```
 docker build -t google-authenticator .
 docker-compose up -d
+docker-compose exec google-authenticator sh
 ```
 
 Inside the container:
@@ -27,8 +34,8 @@ authenticator add Google:youremail@gmail.com
 
 You will need to hand in two things:
 
-1. A passphrase, which will be used to encrypt the token in the container
-2. A shared key, which connects your token and the authorization authority (e.g. Google) into a thrust ring. The shared key could be extracted from the authenticator app, using [a nice tool](https://github.com/scito/extract_otp_secret_keys).
+1. A passphrase, which will be used to encrypt the token in the container (do not set an empty passphrase, otherwise the program will silently abort!)
+2. A shared key, which connects your token and the authorization authority (e.g. Google) into a thrust ring. The shared key could be [extracted](https://github.com/scito/extract_otp_secrets#with-external-qr-decoder-app-from-text-files) from the authenticator app, using [a nice tool](https://github.com/scito/extract_otp_secret_keys).
 
 Once the token is added, it could be used normally:
 
